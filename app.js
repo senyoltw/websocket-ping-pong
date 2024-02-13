@@ -27,8 +27,8 @@ io.on('connection', (socket) => {
     socket.on('message', (msg) => {
         console.log('Message: ' + msg);
 
-        // Pongメッセージとサーバーのホスト名、IPアドレスを含むメッセージをクライアントに送信
-        const pongMessage = `Pong from ${clientHostname} (${clientAddress})`;
+        // Pongメッセージと日時を含むメッセージをクライアントに送信
+        const pongMessage = `Pong from ${clientHostname} (${clientAddress}) at ${new Date().toLocaleString()}`;
         io.emit('message', pongMessage);
     });
 });
