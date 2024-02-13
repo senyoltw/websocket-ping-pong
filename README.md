@@ -9,7 +9,7 @@ https://quay.io/repository/rh_tawatana/websocket-ping-pong?tab=info
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: blue-green-test-tawatana
+  namespace: websocket-ping-pong-ns
   name: websocket-ping-pong
 spec:
   selector:
