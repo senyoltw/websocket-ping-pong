@@ -1,4 +1,4 @@
-FROM registry.redhat.io/ubi9/nodejs-18:latest
+FROM registry.access.redhat.com/ubi9/nodejs-18:latest
 
 # Set the working directory inside the container
 WORKDIR /app
