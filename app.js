@@ -14,7 +14,8 @@ function getBackgroundColor() {
 }
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    // バックグラウンドカラーをHTMLに渡す
+    res.render('index', { background_color: getBackgroundColor() });
 });
 
 io.on('connection', (socket) => {
@@ -34,6 +35,9 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 3000;
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 server.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
