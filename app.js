@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
+const os = require('os');
 
 const app = express();
 const server = http.createServer(app);
@@ -17,12 +18,18 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-    console.log('A user connected');
+    const clientAddress = socket.handshake.address;
+    const clientHostname = os.hostname();
+
+    console.log(`User connected from ${clientHostname} (${clientAddress})`);
 
     // クライアントからのメッセージを受信し、Pongメッセージをブロードキャストする
     socket.on('message', (msg) => {
         console.log('Message: ' + msg);
-        io.emit('message', 'Pong');
+
+        // Pongメッセージとサーバーのホスト名、IPアドレスを含むメッセージをクライアントに送信
+        const pongMessage = `Pong from ${clientHostname} (${clientAddress})`;
+        io.emit('message', pongMessage);
     });
 });
 
