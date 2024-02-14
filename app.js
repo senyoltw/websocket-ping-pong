@@ -20,16 +20,16 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
     const clientAddress = socket.handshake.address;
-    const clientHostname = os.hostname();
+    const osHostname = os.hostname();
 
-    console.log(`User connected from ${clientHostname} (${clientAddress})`);
+    console.log(`User connected from (${clientAddress})`);
 
     // クライアントからのメッセージを受信し、Pongメッセージをブロードキャストする
     socket.on('message', (msg) => {
         console.log('Message: ' + msg);
 
         // Pongメッセージと日時を含むメッセージをクライアントに送信
-        const pongMessage = `Pong from ${clientHostname} (${clientAddress}) at ${new Date().toLocaleString()}`;
+        const pongMessage = `Ping from (${clientAddress}), Pong from ${osHostname} at ${new Date().toLocaleString()}`;
         io.emit('message', pongMessage);
     });
 });
