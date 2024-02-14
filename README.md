@@ -29,5 +29,6 @@ spec:
               protocol: TCP
           env:
             - name: BACKGROUND_COLOR
-              value: blue
+              value: lightblue
+              # value: lightgreen
 ```
