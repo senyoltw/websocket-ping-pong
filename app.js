@@ -8,6 +8,16 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
+// バックグラウンドの色を環境変数から取得する関数
+function getBackgroundColor() {
+    return process.env.BACKGROUND_COLOR || 'lightgray';
+}
+
+app.get('/', (req, res) => {
+    // バックグラウンドカラーをHTMLに渡す
+    res.render('index', { background_color: getBackgroundColor() });
+});
+
 io.on('connection', (socket) => {
     const clientAddress = socket.handshake.address;
     const clientHostname = os.hostname();
