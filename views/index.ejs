@@ -6,14 +6,14 @@
     <title>WebSocket Ping-Pong - <%= process.env.BACKGROUND_COLOR %></title>
     <style>
         body {
-            background-color: <%= background_color %>;
+            background-color: <%= process.env.BACKGROUND_COLOR %>;
             overflow-y: scroll; /* 縦方向のスクロールバーを表示 */
             height: 100vh; /* 画面の高さいっぱいに表示 */
         }
     </style>
 </head>
 <body>
-    <h1>WebSocket Ping-Pong</h1>
+    <h1>WebSocket Ping-Pong - <%= process.env.BACKGROUND_COLOR %></h1>
     <div id="messages" style="height: 80vh; overflow-y: auto;"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <script>
