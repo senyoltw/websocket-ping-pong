@@ -13,13 +13,17 @@ function getBackgroundColor() {
     return process.env.BACKGROUND_COLOR || 'lightgray';
 }
 
+// express全体の設定としてtrust proxyを設定
+app.set('trust proxy', true);
+
 app.get('/', (req, res) => {
     // バックグラウンドカラーをHTMLに渡す
     res.render('index', { background_color: getBackgroundColor() });
 });
 
 io.on('connection', (socket) => {
-    const clientAddress = socket.handshake.address;
+    // x-forwarded-forがあれば利用。なければ物理的に接続されているアドレスを利用
+    const clientAddress = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address;
     const osHostname = os.hostname();
 
     console.log(`User connected from (${clientAddress})`);
