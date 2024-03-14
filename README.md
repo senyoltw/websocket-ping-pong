@@ -41,7 +41,8 @@ spec:
   selector:
     app: websocket-ping-pong
   ports:
-    - protocol: TCP
+    - name: 3000-tcp
+      protocol: TCP
       port: 3000
       targetPort: 3000
 
@@ -51,6 +52,7 @@ kind: Route
 metadata:
   name: websocket-ping-pong
 spec:
+  path: /
   to:
     kind: Service
     name: websocket-ping-pong
