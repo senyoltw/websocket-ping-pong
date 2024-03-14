@@ -6,10 +6,10 @@ https://quay.io/repository/rh_tawatana/websocket-ping-pong?tab=info
 
 # sample Deployment
 ```
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: websocket-ping-pong-ns
   name: websocket-ping-pong
 spec:
   selector:
@@ -31,4 +31,31 @@ spec:
             - name: BACKGROUND_COLOR
               value: lightblue
               # value: lightgreen
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: websocket-ping-pong
+spec:
+  selector:
+    app: websocket-ping-pong
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: websocket-ping-pong
+spec:
+  to:
+    kind: Service
+    name: websocket-ping-pong
+    weight: 100
+  port:
+    targetPort: 3000-tcp
+  wildcardPolicy: None
 ```
