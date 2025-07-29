@@ -29,8 +29,19 @@ spec:
               protocol: TCP
           env:
             - name: BACKGROUND_COLOR
-              value: lightblue
-              # value: lightgreen
+              valueFrom:
+                configMapKeyRef:
+                  name: websocket-ping-pong-config
+                  key: background.color
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: websocket-ping-pong-config
+data:
+  background.color: "lightblue"
+  # background.color: "lightgreen"
 
 ---
 apiVersion: v1
