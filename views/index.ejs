@@ -17,7 +17,9 @@
     <div id="messages" style="height: 80vh; overflow-y: auto;"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <script>
-        var socket = io.connect();
+        var socket = io.connect({
+            pingTimeout: 3000 // 3秒
+        });
 
         socket.on('message', function(msg) {
             var messages = document.getElementById('messages');
