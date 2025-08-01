@@ -25,6 +25,12 @@
             messages.scrollTop = messages.scrollHeight; // 自動スクロール
         });
 
+        // サーバーと再接続されたときにページを強制的にリロードする
+        socket.on('reconnect', function() {
+            console.log('reconnect reload page');
+            window.location.reload();
+        });
+
         setInterval(function() {
             socket.send('Ping');
         }, 1000);
